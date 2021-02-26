@@ -6,24 +6,24 @@ const orm = require('./config/orm.js');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(public));
+app.use(express.static('public'));
 
 app.get('/burger', async function(req, res) {
   console.log('API REQUEST: get all burger info');
-  // get stuff
-  res.send(/* JSON info */);
+  const data = await orm.selectAll();
+  res.send(JSON.stringify(data));
 });
 
-app.get('/burger/:id', async function(req,res) {
-  console.log('API REQUEST: edit burger info for', req.params.id);
-  // get specific id
-  res.send( {message:'success'} );
+app.put('/burger', async function(req,res) {
+  console.log('API REQUEST: edit burger info for: ', req.body);
+  const r = await orm.updateOne(req.body.burger_name, req.body.id);
+  res.send( {message: r.message} );
 })
 
 app.post('/burger', async function(req, res) {
   console.log('API REQUEST: add to burger list', req.body);
-  // post stuff
-  res.send( {message:'success'} );
+  const r = await orm.insertOne(req.body.input);
+  res.send( {message: r.message} );
 })
 
 app.listen(PORT, () => {

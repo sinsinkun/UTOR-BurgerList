@@ -5,15 +5,15 @@ async function selectAll() {
   return data;
 }
 
-async function insertOne(dataObj) {
-  const r = await db.query('INSERT INTO burgers (burger_name, is_eaten) VALUES (?,?)',
-  [dataObj.name, dataObj.isEaten] );
+async function insertOne(burger_name) {
+  const r = await db.query('INSERT INTO burgers (burger_name, is_eaten) VALUES (?, 0)', burger_name);
   return r;
 }
 
-async function updateOne(dataObj) {
-  const r = await db.query('UPDATE burgers SET burger_name = ?, is_eaten = ?, WHERE id = ?',
-  [dataObj.name, dataObj.isEaten, dataObj.id])
+async function updateOne(burger_name, id) {
+  const r = await db.query('UPDATE burgers SET burger_name = ?, is_eaten = 1 WHERE id = ?',
+  [burger_name, Number(id)]);
+  return r;
 }
 
 function end() {
