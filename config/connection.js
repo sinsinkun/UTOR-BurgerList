@@ -31,7 +31,7 @@ function dbConnect(dbName, dbPassword) {
   const db = new Database({
     host: "localhost",
     port: 3306,
-    user: "ojhzkwpd174goz64",
+    user: "root",
     /*! please fill in your password; then create the database name below and create the table */
     password: dbPassword,
     database: dbName

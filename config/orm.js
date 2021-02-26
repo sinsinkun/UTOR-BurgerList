@@ -1,4 +1,4 @@
-const db = require('./connection.js')('ot7rxogk7s7ocyid','un7brfmnu9lc1qc8');
+const db = require('./connection.js')('burgers_db','password');
 
 async function selectAll() {
   const data = db.query('SELECT * FROM burgers');
