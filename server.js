@@ -14,6 +14,12 @@ app.get('/burger', async function(req, res) {
   res.send(JSON.stringify(data));
 });
 
+app.delete('/burger/:id', async function(req, res) {
+  console.log('API REQUEST: delete burger id:', req.params.id);
+  const r = await orm.delOne(req.params.id);
+  res.send( {message: r.message} );
+})
+
 app.put('/burger', async function(req,res) {
   console.log('API REQUEST: edit burger info for: ', req.body);
   const r = await orm.updateOne(req.body.burger_name, req.body.id);

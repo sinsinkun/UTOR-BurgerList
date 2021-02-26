@@ -16,8 +16,13 @@ async function updateOne(burger_name, id) {
   return r;
 }
 
+async function delOne(id) {
+  const r = await db.query('DELETE FROM burgers WHERE id = ?', Number(id));
+  return r;
+}
+
 function end() {
   db.close();
 }
 
-module.exports = {selectAll, insertOne, updateOne, end};
+module.exports = {selectAll, insertOne, updateOne, delOne, end};
